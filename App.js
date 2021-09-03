@@ -1,14 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, 
+        View,
+        Text,
+         } from 'react-native';
+
+import login from './src/pages/login';
+import SignUp from './src/pages/SignUp';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'; 
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-
   return (
-    <View style={styles.container}>
-      <Text>App modificado e upado</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
