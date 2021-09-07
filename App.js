@@ -1,33 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, 
-        View,
-        Text,
-         } from 'react-native';
+import { Provider } from 'react-redux';
+import FlashMessage from 'react-native-flash-message';
 
-import login from './src/pages/login';
-import SignUp from './src/pages/SignUp';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack'; 
+import store from './src/store';
 
-const Stack = createNativeStackNavigator();
+import Pages from './src/pages';
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={login} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+	return (
+		<Provider store={store}>
+			<Pages />
+			<FlashMessage position="top" />
+		</Provider>
+	);
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
