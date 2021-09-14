@@ -17,9 +17,13 @@ const Tab = createBottomTabNavigator();
 import List from './List';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import Restaurante from './Restaurante';
+import { allRestaurants } from '../store/fetchActions';
 
 const tabHomeNavigation = () => {
-	const { isAuthenticated } = useSelector((state) => state.auth);
+	const { isAuthenticated, isAdmin } = useSelector((state) => state.auth);
+	const dispatch = useDispatch();
+	dispatch(allRestaurants());
 
 	return (
 		<Tab.Navigator
@@ -29,8 +33,15 @@ const tabHomeNavigation = () => {
 				options={{
 					tabBarIcon: ({ color }) => <MaterialIcons name="directions-car" size={24} color={color} />
 				}}
-				name="Restaurants"
+				name="Restaurantes"
 				component={List}
+			/>}
+			{isAuthenticated && isAdmin && <Tab.Screen
+				options={{
+					tabBarIcon: ({ color }) => <MaterialIcons name="directions-car" size={24} color={color} />
+				}}
+				name="Restaurantes(Admin)"
+				component={Restaurante}
 			/>}
 			{!isAuthenticated && <Tab.Screen
 				options={{

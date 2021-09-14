@@ -1,7 +1,7 @@
 import api from '../../services/api';
 import { showMessage } from 'react-native-flash-message';
 
-import { login, logout } from '../auth';
+import { login, logout, isadmin } from '../auth';
 import { addRestaurants } from '../restaurants'
 
 export const authLogin = (usuario) => {
@@ -11,6 +11,8 @@ export const authLogin = (usuario) => {
 			.post('/Usuario/Login/', usuario)
             .then((res) => {
 				if (res.data.visibilidade) {
+					if(res.data.login === 'admin')
+						dispatch(isadmin());
 					dispatch(login());
 					showMessage({
 						message: 'Bem-vindo',
@@ -41,6 +43,32 @@ export const signUp = (usuario) => {
 					showMessage({
 						message: 'Wow',
 						description: 'Usuario criado com sucesso',
+						type: 'success'
+					});
+				}
+			})
+			.catch((error) => {
+				const { message } = error.response.data;
+				showMessage({
+					message: 'OPS!',
+					description: message,
+					type: 'danger'
+				});
+			});
+	};
+};
+
+export const criarRestaurante = (restaurante) => {
+
+    return () => {
+		api
+			.post('/Restaurante/', restaurante)
+            .then((res) => {
+				if (res.data.id) {
+					//dispatch(login());
+					showMessage({
+						message: 'Wow',
+						description: 'Restaurante criado com sucesso',
 						type: 'success'
 					});
 				}
