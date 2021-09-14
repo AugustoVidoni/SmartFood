@@ -1,24 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FlatList } from 'react-native';
 
-import { useSelector, useDispatch } from 'react-redux';
-import { allRestaurants } from '../../store/fetchActions';
+import { useSelector } from 'react-redux';
 
 import Restaurant from '../../components/Restaurant';
 
 export default function List() {
 	const { restaurants } = useSelector((state) => state.restaurant);
-	const dispatch = useDispatch();
-
-	console.log('Log no objeto LIST ', restaurants);
-
-	useEffect(
-		() => {
-			dispatch(allRestaurants());
-		},
-		[ restaurants, dispatch ]
-	);
-
+	
 	return (
 		<FlatList
 			style={{ padding: 5 }}
