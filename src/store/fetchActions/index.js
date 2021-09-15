@@ -36,7 +36,7 @@ export const signUp = (usuario) => {
 
     return (dispatch) => {
 		api
-			.post('/Usuario/', usuario)
+			.post('/Usuario/Criar', usuario)
             .then((res) => {
 				if (res.data.login) {
 					dispatch(login());
@@ -62,10 +62,9 @@ export const criarRestaurante = (restaurante) => {
 
     return () => {
 		api
-			.post('/Restaurante/', restaurante)
+			.post('/Restaurante/Criar', restaurante)
             .then((res) => {
 				if (res.data.id) {
-					//dispatch(login());
 					showMessage({
 						message: 'Wow',
 						description: 'Restaurante criado com sucesso',
@@ -91,9 +90,9 @@ export const authLogout = () => {
 };
 
 export const allRestaurants = () => {
-	console.log('Action OK')
+	
 	return (dispatch) => {
-		api.get('/Restaurante')
+		api.get('/Restaurante/Listar')
 		.then((res) => { 
 			dispatch(addRestaurants(res.data));
 		})
