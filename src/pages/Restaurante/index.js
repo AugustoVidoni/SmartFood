@@ -33,7 +33,7 @@ export default function Restaurante() {
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
         <Title text="Restaurante" />
         <Form
-          textSubmit="Restaurante"
+          textSubmit="Adicionar Restaurante"
           submit={submit}
           inputs={[
             {
@@ -51,8 +51,8 @@ export default function Restaurante() {
             {
               placeholder: 'Cidade',
               onChangeText: setcidade,
-              secureTextEntry: true,
-              value: cidade
+              value: cidade,
+              autoCapitalize: 'none'
             },
             {
               placeholder: 'Rua',
